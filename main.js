@@ -12,11 +12,12 @@ const server = http.createServer((req, res) => {
   const obj = parser.parse(xmldata);
 
   const necessaryData = Array.isArray(obj.exchange.currency)
-  ? obj.exchange.currency.map(item => ({
+    ? obj.exchange.currency.map(item => ({
       date: item.exchangedate,
       rate: item.rate
     }))
-  : ["not an array"];
+    : [{date: obj.exchange.currency.exchangedate,
+      rate: obj.exchange.currency.rate}];
 
 
   const xmlObj = {
